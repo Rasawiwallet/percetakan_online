@@ -29,6 +29,7 @@ User dapat melakukan pemesanan cetak secara online, dan sistem akan memproses se
   * Upload file
   * Pilih jenis cetak
   * Status order
+  * **Admin management system**
 
 ---
 
@@ -36,10 +37,11 @@ User dapat melakukan pemesanan cetak secara online, dan sistem akan memproses se
 
 * Arsitektur:
 
-  * User → Website → Database → ESP32 → Printer
+  * **Admin → User → Website → Database → ESP32 → Printer**
 * Desain database:
 
   * Tabel `users`
+  * Tabel `admin`
   * Tabel `mitra`
   * Tabel `orders`
 
@@ -53,12 +55,22 @@ User dapat melakukan pemesanan cetak secara online, dan sistem akan memproses se
   * PHP (Native)
   * MySQL (Database)
 
-Fitur:
+### Fitur:
 
-* Halaman login/register
-* Dashboard user
-* Form upload file
-* Sistem order
+#### 👤 User:
+
+* Login/register
+* Upload file
+* Order cetak
+* Lihat status
+
+#### 🛠️ Admin:
+
+* Login admin
+* Kelola user
+* Kelola mitra percetakan
+* Monitoring semua order
+* Laporan data
 
 ---
 
@@ -85,17 +97,19 @@ Fitur:
 
 Alur:
 
-1. User melakukan order
-2. Data masuk database
-3. ESP32 mengambil data
-4. Proses cetak
-5. Update status
-6. Website menampilkan status
+1. **Admin mengelola sistem (user & mitra)**
+2. User melakukan order
+3. Data masuk database
+4. ESP32 mengambil data
+5. Proses cetak
+6. Update status
+7. Website menampilkan status
 
 ---
 
 ## 🔷 7. Testing
 
+* Uji login admin & user
 * Uji upload file
 * Uji koneksi database
 * Uji API
@@ -127,6 +141,11 @@ percetakan-iot/
 │   ├── register.php
 │   ├── dashboard.php
 │   ├── upload.php
+│   ├── admin/                 # Halaman Admin
+│   │   ├── dashboard.php
+│   │   ├── kelola_user.php
+│   │   ├── kelola_mitra.php
+│   │   └── laporan.php
 │   └── assets/
 │       ├── css/
 │       ├── js/
@@ -164,9 +183,9 @@ percetakan-iot/
 # 🔗 Alur Sistem
 
 ```
-User → Website → Database → API → ESP32 → Printer
-                         ↑                 ↓
-                      Update Status ←------
+Admin → User → Website → Database → API → ESP32 → Printer
+                          ↑                     ↓
+                     Monitoring & Control ←-----
 ```
 
 ---
@@ -185,6 +204,7 @@ User → Website → Database → API → ESP32 → Printer
 
 * Mempermudah pemesanan percetakan
 * Mengintegrasikan sistem web dengan perangkat fisik
+* Memberikan kontrol penuh kepada admin
 * Menerapkan konsep IoT dalam dunia nyata
 
 ---
@@ -200,5 +220,5 @@ User → Website → Database → API → ESP32 → Printer
 
 # 👨‍💻 Author
 
-Nama: (Isi Nama Kamu)
+Nama: Ibnu SahrulAnwar
 Project: Tugas Project Based Learning
