@@ -72,6 +72,14 @@ User dapat melakukan pemesanan cetak secara online, dan sistem akan memproses se
 * Monitoring semua order
 * Laporan data
 
+#### Tambahan
+* Halaman home
+* Halaman Upload dan Custom Produk
+* Halaman Pilih Percetakan (Maps)
+* Halaman Cekout
+* Halaman Tracking pesanan
+* Dashboard Mitra Percetakan
+
 ---
 
 ## 🔷 4. Pembuatan REST API
