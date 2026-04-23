@@ -42,14 +42,28 @@ C. Sistem Area Parkir
 ![contoh hasil](gambar/contoh_gambaran1.jpg)
 
 Komponen:
-Sensor tiap slot:
-Ultrasonic / IR
-LED indikator:
-Hijau = kosong
-Merah = terisi
+-Sensor tiap slot:
+-Ultrasonic / IR
+-LED indikator:
+-Hijau = kosong
+-Merah = terisi
 
 Fungsi:
+-Deteksi ketersediaan parkir
+-Kirim data ke ESP32 → tampil di web
 
-Deteksi ketersediaan parkir
-Kirim data ke ESP32 → tampil di web
 D. Sistem Gate Keluar (OUT)
+
+[gambar](gambar/contoh_gambar3.jpg)
+[gambar](gambar/contoh_gambar4.jpg)
+
+Komponen:
+-RFID reader / barcode scanner
+-Servo motor (palang keluar)
+-LCD display (info pembayaran)
+-Buzzer
+
+Fungsi:
+-Scan karcis
+-Hitung durasi parkir
+-Validasi → palang terbuka
