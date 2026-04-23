@@ -54,8 +54,8 @@ Fungsi:
 
 D. Sistem Gate Keluar (OUT)
 
-[gambar](gambar/contoh_gambar3.jpg)
-[gambar](gambar/contoh_gambar4.jpg)
+[gambar](gambar/contoh_gambaran3.jpg)
+[gambar](gambar/contoh_gambaran4.jpg)
 
 Komponen:
 -RFID reader / barcode scanner
@@ -131,6 +131,7 @@ Scan untuk keluar
 
 [Gate OUT] ------> [ESP32]
 ```
+
 💡 6. Nilai Inovasi (biar beda dari yang lain)
 
 --Tampilan slot di monitor langsung
