@@ -22,7 +22,7 @@ Fungsi:
 --Kirim data ke web/app
 
 B. Sistem Gate Masuk (IN)
-![gambaran] gambar/contoh_gambaran.jpg
+![gambaran] (gambar/contoh_gambaran.jpg)
 
 Komponen:
 -Sensor kendaraan: Ultrasonic / IR
