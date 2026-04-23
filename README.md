@@ -22,7 +22,8 @@ Fungsi:
 --Kirim data ke web/app
 
 B. Sistem Gate Masuk (IN)
-![gambaran] (gambar/contoh_gambaran.jpg)
+
+![contoh hasil](gambar/contoh_gambaran.jpg)
 
 Komponen:
 -Sensor kendaraan: Ultrasonic / IR
@@ -37,7 +38,8 @@ Fungsi:
 -Palang terbuka otomatis
 
 C. Sistem Area Parkir
-![gambar](contoh_gambaran1.jpg)
+
+![contoh hasil](gambar/contoh_gambaran1.jpg)
 
 Komponen:
 Sensor tiap slot:
