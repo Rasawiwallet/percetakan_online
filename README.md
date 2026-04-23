@@ -67,3 +67,73 @@ Fungsi:
 -Scan karcis
 -Hitung durasi parkir
 -Validasi → palang terbuka
+
+E. Sistem Server / Monitoring
+-Web dashboard / aplikasi
+-Database (Firebase / MySQL)
+
+Fungsi:
+-Tampilkan:
+--Slot kosong
+--Data kendaraan masuk/keluar
+
+🔄 3. Alur Kerja Sistem
+▶️ Masuk (Gate IN)
+1. Sensor mendeteksi kendaraan
+2. Pengendara tekan tombol
+3. Sistem:
+-Generate ID karcis
+-Simpan ke database
+4. Palang terbuka
+5. Kendaraan masuk
+
+🅿️ Parkir
+1. Sensor slot mendeteksi kendaraan
+2. Status dikirim ke server:
+-Kosong / Terisi
+3. Ditampilkan di:
+-Web / LCD / LED indikator
+
+⬅️ Keluar (Gate OUT)
+1. User scan karcis (RFID/barcode)
+2. Sistem:
+-Ambil waktu masuk
+-Hitung durasi
+3. Jika valid:
+-Palang terbuka
+-Data dihapus / update
+
+🎫 4. Desain Karcis Parkir
+
+Karcis bisa sederhana (paper / digital):
+
+Isi:
+
+ID kendaraan (unik)
+Waktu masuk
+QR code / barcode
+
+```
+PARKIR IoT
+ID : A123
+Masuk : 10:32
+Scan untuk keluar
+```
+
+🔌 5. Diagram Blok Sistem (Sederhana)
+
+```
+[Sensor Slot] ---> 
+                  \
+                   --> [ESP32] ---> [WiFi] ---> [Web/App]
+                  /
+[Gate IN] --------
+
+[Gate OUT] ------> [ESP32]
+```
+💡 6. Nilai Inovasi (biar beda dari yang lain)
+
+--Tampilan slot di monitor langsung
+--LED penunjuk slot kosong
+--QR code ticket (lebih modern dari kertas)
+--Auto counting kapasitas parkir
