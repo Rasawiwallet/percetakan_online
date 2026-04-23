@@ -54,8 +54,8 @@ Fungsi:
 
 D. Sistem Gate Keluar (OUT)
 
-[gambar](gambar/contoh_gambaran3.jpg)
-[gambar](gambar/contoh_gambaran4.jpg)
+![contoh hasil](gambar/contoh_gambaran3.jpg)
+![contoh hasil](gambar/contoh_gambaran4.jpg)
 
 Komponen:
 -RFID reader / barcode scanner
