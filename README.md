@@ -5,136 +5,80 @@ Project Kelompok
 3. Ramzi Selpora Widiyanto ()
 4. Ali Jati Utomo ()
 
----
+Monitoring Slot Parkir Real-Time dengan Sistem Counting Otomatis
 
-🧠 1. Konsep Sistem Smart Parking IoT
-Sistem terdiri dari 3 bagian utama:
-1. Gate masuk (ambil karcis)
-2. Area parkir (deteksi slot kosong)
-3. Gate keluar (validasi karcis + buka palang)
+Deskripsi Sistem
+Sistem ini digunakan untuk mendeteksi jumlah kendaraan yang masuk dan keluar area parkir secara otomatis sehingga dapat diketahui ketersediaan slot parkir secara real-time.
 
-⚙️ 2. Struktur Alat (Hardware)
-A. Mikrokontroler Utama
--ESP32 DevKit V1
-Fungsi:
---Otak sistem
---Koneksi WiFi (IoT)
---Kirim data ke web/app
+Konsep Sistem
+Sistem parkir otomatis yang:
+1. Menghitung kendaraan masuk/keluar (ESP32)
+2. Membaca plat nomor kendaraan (ANPR)
+3. Mendeteksi slot parkir kosong/terisi (computer vision)
+4. Menampilkan data ke monitor + website
+5. Mencetak struk parkir
+6. Menyimpan data ke MySQL
 
-B. Sistem Gate Masuk (IN)
+Arsitektur Kerja
+1. Kendaraan masuk
+    - Sensor ultrasonik mendeteksi kendaraan
+    - Kamera membaca plat nomor
+    - Sistem mencetak struk
+    - Counter bertambah
+2. Kendaraan parkir
+    - Kamera area parkir mendeteksi slot kosong/ terisi
+3. Kendaraan keluar 
+    - Scan barcode karcis parkir
+    - bayar pakai non tunai dan tunai
+    - Counter berkurang
+4. Data dikirim ke
+    - Monitor lokal
+    - Website (real-time)
 
-![contoh hasil](gambar/contoh_gambaran.jpg)
+Pembagian Sistem
+1. Mikrokontroler - ESP32
+  Fungsi:
+    - Membaca sensor ultrasonik
+    - Mengontrol palang pintu
+    - Mengirim data ke server
+    - Sistem counting kendaraan
+2. Kamera + Computer Vision
+  Gunakan:
+    - Kamera CCTV /  Webcam
+    - Diproses di:
+      - PC/ Laptop
+      - atau Server
+  Teknologi:
+    - OpenCV = deteksi slot parkir
+    - Tesseract = baca plat nomor
+3. Backend & database
+  Gunkan:
+    - MySQL = simpan data
+      - plat nomor
+      - Waktu masuk/keluar
+      - status parkir
+    - Web server (PHP/ NOde.js)
+4. Website Monitoring
+  Menampilkan:
+    - Jumlah kendaraan
+    - Slot tersedia
+    - Data kendaraan masuk/keluar
+5. Printer Struk
+  Gunakan:
+    - Thermal printer (seerial)
+    - Terhubung ke ESP32 / server
+6. Blok Diagram
 
-Komponen:
--Sensor kendaraan: Ultrasonic / IR
--Push button (ambil tiket)
--Thermal printer mini / LCD (opsional)
--Servo motor (palang)
--Buzzer
-
-Fungsi:
--Deteksi kendaraan datang
--User tekan tombol → cetak / generate karcis
--Palang terbuka otomatis
-
-C. Sistem Area Parkir
-
-![contoh hasil](gambar/contoh_gambaran1.jpg)
-
-Komponen:
--Sensor tiap slot:
--Ultrasonic / IR
--LED indikator:
--Hijau = kosong
--Merah = terisi
-
-Fungsi:
--Deteksi ketersediaan parkir
--Kirim data ke ESP32 → tampil di web
-
-D. Sistem Gate Keluar (OUT)
-
-![contoh hasil](gambar/contoh_gambaran3.jpg)
-![contoh hasil](gambar/contoh_gambaran4.jpg)
-
-Komponen:
--RFID reader / barcode scanner
--Servo motor (palang keluar)
--LCD display (info pembayaran)
--Buzzer
-
-Fungsi:
--Scan karcis
--Hitung durasi parkir
--Validasi → palang terbuka
-
-E. Sistem Server / Monitoring
--Web dashboard / aplikasi
--Database (Firebase / MySQL)
-
-Fungsi:
--Tampilkan:
---Slot kosong
---Data kendaraan masuk/keluar
-
-🔄 3. Alur Kerja Sistem
-▶️ Masuk (Gate IN)
-1. Sensor mendeteksi kendaraan
-2. Pengendara tekan tombol
-3. Sistem:
--Generate ID karcis
--Simpan ke database
-4. Palang terbuka
-5. Kendaraan masuk
-
-🅿️ Parkir
-1. Sensor slot mendeteksi kendaraan
-2. Status dikirim ke server:
--Kosong / Terisi
-3. Ditampilkan di:
--Web / LCD / LED indikator
-
-⬅️ Keluar (Gate OUT)
-1. User scan karcis (RFID/barcode)
-2. Sistem:
--Ambil waktu masuk
--Hitung durasi
-3. Jika valid:
--Palang terbuka
--Data dihapus / update
-
-🎫 4. Desain Karcis Parkir
-
-Karcis bisa sederhana (paper / digital):
-
-Isi:
-
-ID kendaraan (unik)
-Waktu masuk
-QR code / barcode
-
-```
-PARKIR IoT
-ID : A123
-Masuk : 10:32
-Scan untuk keluar
-```
-
-🔌 5. Diagram Blok Sistem (Sederhana)
-
-```
-[Sensor Slot] ---> 
-                  \
-                   --> [ESP32] ---> [WiFi] ---> [Web/App]
-                  /
-[Gate IN] --------
-
-[Gate OUT] ------> [ESP32]
-```
-
-💡 6. Nilai Inovasi (biar beda dari yang lain)
-
---Tampilan slot di monitor langsung
---LED penunjuk slot kosong
---QR code ticket (lebih modern dari kertas)
---Auto counting kapasitas parkir
+[Ultrasonic Sensor] ──┐
+                      ├──> [ESP32] ───> [Palang + Printer]
+[Kamera Masuk] ───────┘        │
+                               ▼
+                          [Server / PC]
+                         (OpenCV + OCR)
+                               │
+                               ▼
+                           [MySQL]
+                               │
+                ┌──────────────┴──────────────┐
+                ▼                             ▼
+          [Website]                    [Monitor Display]
