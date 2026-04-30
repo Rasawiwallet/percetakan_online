@@ -1,0 +1,77 @@
+Monitoring Slot Parkir Real-Time dengan Sistem Counting Otomatis
+
+Deskripsi Sistem
+Sistem ini digunakan untuk mendeteksi jumlah kendaraan yang masuk dan keluar area parkir secara otomatis sehingga dapat diketahui ketersediaan slot parkir secara real-time.
+
+Konsep Sistem
+Sistem parkir otomatis yang:
+1. Menghitung kendaraan masuk/keluar (ESP32)
+2. Membaca plat nomor kendaraan (ANPR)
+3. Mendeteksi slot parkir kosong/terisi (computer vision)
+4. Menampilkan data ke monitor + website
+5. Mencetak struk parkir
+6. Menyimpan data ke MySQL
+
+Arsitektur Kerja
+1. Kendaraan masuk
+    - Sensor ultrasonik mendeteksi kendaraan
+    - Kamera membaca plat nomor
+    - Sistem mencetak struk
+    - Counter bertambah
+2. Kendaraan parkir
+    - Kamera area parkir mendeteksi slot kosong/ terisi
+3. Kendaraan keluar 
+    - Scan barcode karcis parkir
+    - bayar pakai non tunai dan tunai
+    - Counter berkurang
+4. Data dikirim ke
+    - Monitor lokal
+    - Website (real-time)
+
+Pembagian Sistem
+1. Mikrokontroler - ESP32
+  Fungsi:
+    - Membaca sensor ultrasonik
+    - Mengontrol palang pintu
+    - Mengirim data ke server
+    - Sistem counting kendaraan
+2. Kamera + Computer Vision
+  Gunakan:
+    - Kamera CCTV /  Webcam
+    - Diproses di:
+      - PC/ Laptop
+      - atau Server
+  Teknologi:
+    - OpenCV = deteksi slot parkir
+    - Tesseract = baca plat nomor
+3. Backend & database
+  Gunkan:
+    - MySQL = simpan data
+      - plat nomor
+      - Waktu masuk/keluar
+      - status parkir
+    - Web server (PHP/ NOde.js)
+4. Website Monitoring
+  Menampilkan:
+    - Jumlah kendaraan
+    - Slot tersedia
+    - Data kendaraan masuk/keluar
+5. Printer Struk
+  Gunakan:
+    - Thermal printer (seerial)
+    - Terhubung ke ESP32 / server
+6. Blok Diagram
+
+[Ultrasonic Sensor] ──┐
+                      ├──> [ESP32] ───> [Palang + Printer]
+[Kamera Masuk] ───────┘        │
+                               ▼
+                          [Server / PC]
+                         (OpenCV + OCR)
+                               │
+                               ▼
+                           [MySQL]
+                               │
+                ┌──────────────┴──────────────┐
+                ▼                             ▼
+          [Website]                    [Monitor Display]
